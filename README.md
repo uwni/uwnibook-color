@@ -10,6 +10,8 @@ typst init @preview/uwnibook-color-typ:0.1.0
 > [!WARNING]
 > Under active development. use it on your own risk.
 
+Check `documentation/main.typ` and `documentation/main.pdf` for details.
+
 ## Features
 - [x] Margin support with a modified version of [Marginalia](https://github.com/nleanba/typst-marginalia)
 - [x] built-in double side support
