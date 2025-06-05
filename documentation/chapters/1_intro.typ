@@ -76,6 +76,38 @@ $
 請問偏序集恆有上界乎？
 1。有限集顯然恆有界，且 $sup S= max S$ 而 $inf S = min S$ 也。依序可列 $S$ 之元,
 
+#proposition[
+  有序列 ${a_n}$ 單調遞減而 ${b_n}$ 單調遞增者，且 $a_n >= b_n$。
+  $ forall i, j in NN, quad a_i >= b_j $
+  意即，$a_n$ 皆 $b_n$ 之上界也，$b_n$ 皆 $a_n$ 之下界也。
+]
+
+#proof[
+  設 $i, j ∈ ℕ$，不失一般性，分三種情況討論：
+
+  *情況一：* $i = j$
+
+  由題設知 $a_i ≥ b_i$，故 $a_i ≥ b_j$。
+
+  *情況二：* $i < j$
+
+  因 ${a_n}$ 單調遞減，故 $a_i ≥ a_j$。
+  因 ${b_n}$ 單調遞增，故 $b_j ≥ b_i$。
+  由題設 $a_j ≥ b_j$，結合上述不等式：
+  $a_i ≥ a_j ≥ b_j$
+
+  *情況三：* $i > j$
+
+  因 ${a_n}$ 單調遞減，故 $a_j ≥ a_i$。
+  因 ${b_n}$ 單調遞增，故 $b_i ≥ b_j$。
+  由題設 $a_i ≥ b_i$，結合上述不等式：
+  $a_i ≥ b_i ≥ b_j$
+
+  綜上所述，$∀i, j ∈ ℕ$，恆有 $a_i ≥ b_j$。
+
+  因此，任意 $a_i$ 皆為序列 ${b_n}$ 之上界，任意 $b_j$ 皆為序列 ${a_n}$ 之下界。
+]
+
 
 == 代數
 
@@ -184,17 +216,17 @@ $
   QQ2 := {x in QQ | x^2 < 2}
 $
 即知有上界也。而無上確界。擬以歸謬法證之：
-設其上確界爲 $macron(x)$，則 $forall x in QQ2, macron(x) >= x$，
+設其上確界爲 $dash(x)$，則 $forall x in QQ2, dash(x) >= x$，
 $
-  forall epsilon > 0, exists y in QQ2, macron(x) - epsilon < y
+  forall epsilon > 0, exists y in QQ2, dash(x) - epsilon < y
 $
 
 由全序關係之三歧性知
-+ 若 $macron(x)^2 = 2$: 證偽
-+ 若 $macron(x)^2 > 2$，需證明 $exists y in QQ2, y < macron(x)$，設 $y = macron(x) - epsilon$，並使 $y^2 > 2$。即 $y$ 爲上界而甚小耳。 $ (macron(x) - epsilon)^2 >= 2 <=> macron(x)^2 - 2 macron(x) epsilon + epsilon^2 > 2 arrow.l.double macron(x)^2 - 2 macron(x) epsilon >= 2 <=> epsilon <= (macron(x)^2 - 2) / (2 macron(x)) $
-  不妨取 $epsilon = (macron(x)^2 - 2) / (2 macron(x))$，即爲證
-+ 若 $macron(x)^2 < 2$，需證明 $exists y in QQ2, y > macron(x)$，設 $y = macron(x) + epsilon$。即 $macron(x)$ 乃非上界耳。 $ y^2 = (macron(x) + epsilon)^2 <= 2 <=> macron(x)^2 + 2 macron(x) epsilon + epsilon^2 < 2 arrow.l.double macron(x)^2 + 2 macron(x) epsilon <= 2 <=> epsilon <= (2 - macron(x)^2) / (2 macron(x)) $
-  不妨取 $epsilon = (2 - macron(x)^2) / (2 macron(x))$，即爲證
++ 若 $dash(x)^2 = 2$: 證偽
++ 若 $dash(x)^2 > 2$，需證明 $exists y in QQ2, y < dash(x)$，設 $y = dash(x) - epsilon$，並使 $y^2 > 2$。即 $y$ 爲上界而甚小耳。 $ (dash(x) - epsilon)^2 >= 2 <=> dash(x)^2 - 2 dash(x) epsilon + epsilon^2 > 2 arrow.l.double dash(x)^2 - 2 dash(x) epsilon >= 2 <=> epsilon <= (dash(x)^2 - 2) / (2 dash(x)) $
+  不妨取 $epsilon = (dash(x)^2 - 2) / (2 dash(x))$，即爲證
++ 若 $dash(x)^2 < 2$，需證明 $exists y in QQ2, y > dash(x)$，設 $y = dash(x) + epsilon$。即 $dash(x)$ 乃非上界耳。 $ y^2 = (dash(x) + epsilon)^2 <= 2 <=> dash(x)^2 + 2 dash(x) epsilon + epsilon^2 < 2 arrow.l.double dash(x)^2 + 2 dash(x) epsilon <= 2 <=> epsilon <= (2 - dash(x)^2) / (2 dash(x)) $
+  不妨取 $epsilon = (2 - dash(x)^2) / (2 dash(x))$，即爲證
 
 故知 $QQ2$ #index[上確界]之不存也。
 
@@ -355,32 +387,40 @@ $
 == 常數 $eu$
 常數 $eu$，或曰*自然底數*，初見於複利率之計算。凡 $n > 0$ 有定義曰
 $ eu := lim_(n->oo) a_n = lim_(n -> oo) (1+1 / n)^n $
-此處唯需證明 RHS 收斂。請道其證法
+此處唯需證明 RHS 收斂。請道其證法。
 $
   a_n
   = sum_(k=0)^n binom(n, k)(1 / n)^k
   = sum_(k=0)^n n^(underline(k)) / (k! n^k)
 $
 
-$n^(underline(k)) / (k! n^k) >0$ ，則知 $a_n$ 之嚴格遞增矣。張之
-
+$n^(underline(k)) / (k! n^k) >0$ ，則知 $a_n$ 之嚴格遞增矣。
+考慮
 $
-  a_n &= sum_(k=0)^n 1 / k! n / n (n-1) / n dots.c (n-k+1) / n \
-  &= sum_(k=0)^n 1 / k! (1 - 1 / n) dots.c (1 - (k-1) / n) \
-$<eq:an-expand>
-
-茲定義曰 $e_n := sum_(k=0)^n 1\/k!$ ，逐項比較即知 $a_n < e_n$
-
-由 $(forall k >= 1) thick 1\/k! <= 1\/2^(k-1)$
+  b_n := (1+1 / n)^(n+1 / 2)
 $
-  (1+1 / n)^n <= e_n
+$
+  b_n / b_(n-1) = (1-1 / n^2)^(n-1 / 2) < 1
+$
+故 $b_n$ 單調遞減且 $b_n = a_n sqrt(1+1\/n) > a_n$, 故 $b_n$ 皆 $a_n$ 之上界也。故知 $a_n$ 收斂。$2 = a_1 < eu < b_1 = 2sqrt(2)$。#note[實則 $b_n tilde.eq a_n "as" n -> oo$]
+
+#example(title: [別證])[
+
+]
+茲定義曰 $e_n := sum_(k=0)^n 1\/k!$，由 $(forall k >= 1) thick 1\/k! <= 1\/2^(k-1)$
+$
+  e_n
   &= 1 + 1 + 1 / 2 + 1 / (2 times 3) + dots.c + 1 / (2 times dots.c times (n-1) times n)\
   &<= 1 + 1 + 1 / 2 + 1 / (2 times 2) + dots.c + 1 / (2^(n-1))\
   &<= 3
 $
-抑由 $ (forall k >= 2) quad 1 / k! <= 1 / k(k-1) = 1 / (k-1) - 1 / (k) $
-亦得所欲證。由定義知 $sup a_n = eu$ 也。
-法前例亦可得證 $e_n$ 之收斂。然 $lim_(n->oo) e_n eq.quest eu$ 之真僞猶未可辨，不宜臆斷。
+抑由 $forall k >= 2$
+$
+  1 / k! <= 1 / k(k-1) = 1 / (k-1) - 1 / (k) \
+  e_n = 2 + sum_(k=2)^n 1 / k! <= 2 + (1 - 1 / n) <= 3 \
+$
+得 $3$ 者 $e_n$ 之上界也。同理可證 $e_n$ 之收斂也。
+由定義知 $sup a_n = eu$ 也。以前例亦得證 $e_n$ 之收斂。然 $lim_(n->oo) e_n eq.quest eu$ 之真僞猶未能辨，不宜臆斷。
 
 #let e_n_plot(n) = {
   range(n + 1).fold(
@@ -393,36 +433,23 @@ $
 #let e_plot(n) = calc.pow(1 + 1 / n, n)
 
 
-再證二者收斂於同處。庶幾以夾逼定理證之，唯需各項 $a_n < e_n < eu$。以上圖料其然也。然理學也非證不信非驗不服。請證之如下。令@eq:an-expand 之 $n -> oo$，左邊收斂於 $eu$ 而 $"右邊" tilde.eq e_n$ 也。故 $e_n < eu$，然則可以[假幣定理]得其證矣。
+再證二者收斂於同處。庶幾以夾逼定理證之，唯需各項 $a_n < e_n < eu$。以上圖料其然也。然理學也非證不信非驗不服。請證之如下。
 
-此二例以其典據垂於史，而級數之收斂至 $eu$ 者止此二例歟? 另察一例 $b_n = (1 + 1 \/ n)^(n+1)$ 可見
-$
-  lim_(n -> oo) b_n = lim_(n -> oo) (1 + 1 / n)a_n = lim_(n -> oo) a_n= eu
-$
-有違於前，$b_n$ 單調遞減並收斂至 $eu$ 也。請證明如下
-$
-  b_n / b_(n-1) =
-  (1 + 1 / n)^(n+1) / (1 + 1 / (n-1))^n
-  // = (1 + n^(-1)) (
-  //   (1 + n^(-1))/(1 + (n-1)^(-1))
-  // )^n \
-  // = (1 + n^(-1)) (((1 + n^(-1)) (n-1)) / (n - 1 + 1))^n \
-  // = (1 + n^(-1)) ((n-n^(-1))/n)^n \
-  = (1 + 1 / n) (1 - 1 / n^2)^n \
-$
-欲證明 $forall n > 1$，$b_n\/b_(n-1) < 1$，即求證
-$
-  (1 - 1 / n^2)^n < n / (n+1)
-$
-凡 $x in (0, 1]$，因 $(1-x)(1+x) = 1-x^2 < 1$ 故 $(1-x)^n < (1+x)^(-n)$，
-换元以 $x |-> 1\/n^2$，並乘兩邊以 $1+1\/n$，再以Bernoulli不等式得
-
-$
-  (1+1 / n )(1 - 1 / n^2)^n < (1+1 / n ) (1 + 1 / n^2)^(-n) < (1+1 / n )(1 + n / n^2)^(-1) = 1
-$
-
-$b_n\/b_(n-1) < 1$ 也。而 $b_n$ 之嚴格遞減可知矣。故 $inf b_n = eu$
-
+#proof[
+  張 $a_n$ 如下, $forall k < n$
+  $
+    a_n &= sum_(m=0)^n 1 / m! n / n (n-1) / n dots.c (n-m+1) / n \
+    &= 1 + 1 + 1 / 2! (1-1 / n) + dots.c + 1 / n! (1 - 1 / n) dots.c (1 - (n-1) / n) \
+    &> 1 + 1 + 1 / 2! (1-1 / n) + dots.c + 1 / k! (1 - 1 / n) dots.c (1 - (k-1) / n) \
+  $<eq:an-expand>
+  令 $n -> oo$。然則 $k in NN$
+  $
+    eu > 1 + 1 + 1 / 2! + dots.c + 1 / k! = e_k
+  $
+  逐項比較@eq:an-expand 與 $e_n$，知 $e_n > a_n$。故
+  $
+    lim_(n -> oo) e_n = eu
+  $]
 
 === 指數函數
 

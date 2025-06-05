@@ -31,19 +31,6 @@
 #let _default_weight = 400
 #let _subheading_size = 13pt
 
-#let i18n = (
-  chapter: "章",
-  section: "節",
-  appendix: "附錄",
-  proof: (name: "證明：", supplement: "證明"),
-  proposition: "命題",
-  example: "例",
-  definition: "定義",
-  bibliography: "參考文獻",
-  index: "索引",
-  equation: "式",
-  toc: "目錄",
-)
 
 #let _color_palette = (
   accent: rgb(189, 28, 62),
@@ -54,3 +41,17 @@
   grey-light: rgb(224, 228, 228),
 )
 #let _qed_symbol = text(font: _math_text_opts.font)[$qed$]
+
+#let i18n = (
+  chapter: "章",
+  section: "節",
+  appendix: "附錄",
+  proof: (name: [*證：*], supplement: "證明"),
+  proposition: "命題",
+  example: "例",
+  definition: "定義",
+  bibliography: "參考文獻",
+  index: "索引",
+  equation: "式",
+  toc: "目錄",
+)
