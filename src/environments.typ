@@ -111,7 +111,6 @@
   #_env_state.update(it => it + (str(kind): it.at(kind, default: 0) + 1))
   #show figure.where(kind: kind): set block(breakable: true)
   #show figure.where(kind: kind): set par(spacing: config._envskip)
-  #let name = upper(name)
   #figure(
     kind: kind,
     supplement: supplement,

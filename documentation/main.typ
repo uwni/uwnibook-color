@@ -26,7 +26,5 @@
   #include "appendices/proof.typ"
 ]
 
-#include "misc/ref.typ"
-
 #make-index()
-
+#include "misc/ref.typ"

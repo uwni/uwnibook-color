@@ -19,7 +19,7 @@
   typst init @preview/uwnibook-color:0.1.0
 ```
 
-範本內已有 uwnibook-color 模板之基礎。循理衍其文章，行快而便也。惟範本素而不饰，本冊 @chap:example 各例悉備，可以效也。
+範本內已有 uwnibook-color 模板之基礎。循理衍其文章，行快而便也。惟範本素而不飾，本冊 @chap:example 各例悉備，可以效也。
 
 === 結構
 範本結構如是：
@@ -74,8 +74,8 @@ TODO, 写文档的复杂度超出了我的预料（ 暂时可参考后文的用�
 
 == 解惑
 - 惑於 Typst，參閱
- - 官方文檔 https://typst.app/docs/
- - 抑可入中文交流群 https://qm.qq.com/q/iDkMOD4kh4
+  - 官方文檔 https://typst.app/docs/
+  - 抑可入中文交流群 https://qm.qq.com/q/iDkMOD4kh4
 
 - 惑於本書版
   - 於 GitHub Issue 垂詢

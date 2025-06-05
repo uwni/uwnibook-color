@@ -43,7 +43,7 @@
   bibliography: "参考文献",
   index: "索引",
   equation: "公式",
-  toc: "Table of Contents",
+  toc: "目录",
 )
 
 #let _color_palette = (
