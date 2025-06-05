@@ -97,8 +97,6 @@
 #let environment(
   config,
   kind,
-  name,
-  supplement,
   topdeco: (..) => none,
   bottomdeco: (..) => none,
   frame,
@@ -111,6 +109,13 @@
   #_env_state.update(it => it + (str(kind): it.at(kind, default: 0) + 1))
   #show figure.where(kind: kind): set block(breakable: true)
   #show figure.where(kind: kind): set par(spacing: config._envskip)
+  #let i18n = config.i18n.at(kind)
+  #let (name, supplement) = if type(i18n) == dictionary {
+    (i18n.name, i18n.supplement)
+  } else if type(i18n) == str {
+    (i18n, i18n)
+  } else { panic("Invalid i18n entry for kind: " + kind) }
+  
   #figure(
     kind: kind,
     supplement: supplement,
@@ -141,8 +146,6 @@
 #let _remark(config, ..args) = environment(
   config,
   "remark",
-  "REMARK",
-  "Remark",
   red-frame,
   red-frame-heading.with(config),
   none,
@@ -152,8 +155,6 @@
 #let _example(config, title: none, ..args) = environment(
   config,
   "example",
-  config.i18n.example,
-  config.i18n.example,
   dash-frame,
   dash-frame-heading.with(config),
   title,
@@ -163,8 +164,6 @@
 #let _proposition(config, title: none, ..args) = environment(
   config,
   "proposition",
-  config.i18n.proposition,
-  config.i18n.proposition,
   topdeco: accent-topdeco,
   bottomdeco: accent-bottomdeco,
   accent-frame,
@@ -182,8 +181,6 @@
 #let _definition(config, title: none, ..args) = environment(
   config,
   "definition",
-  config.i18n.definition,
-  config.i18n.definition,
   solid-frame,
   accent-frame-heading.with(config),
   title,
@@ -207,8 +204,6 @@
     config,
     numbered: false,
     "proof",
-    config.i18n.proof.name,
-    config.i18n.proof.supplement,
     plain-frame,
     plain-frame-heading,
     none,
