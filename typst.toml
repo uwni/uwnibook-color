@@ -1,13 +1,14 @@
 [package]
 name = "uwnibook-color"
-version = "0.1.0"
+version = "0.1.1"
 entrypoint = "lib.typ"
-authors = ["枚鴉 <@uwni>"]
+authors = [ "枚鴉 <@uwni>" ]
 license = "MPL-2.0"
 description = "A book template for my personal usage, with multilingual support"
-categories = ["book"]
+categories = [ "book" ]
 compiler = "0.13.1"
 repository = "https://github.com/uwni/uwnibook-color"
+disciplines = [ ]
 
 [template]
 path = "boilerplate"
