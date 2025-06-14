@@ -5,7 +5,7 @@
 #let _serif_font = ("Minion 3", "尙古明體SC", "Noto Color Emoji")
 #let _caption_font = ("Minion 3 Caption", "尙古明體SC")
 #let _subheading_font = ("Minion 3 Subhead", "尙古明體SC")
-#let _math_text_opts = (font: (.._serif_font, "STIX Two Math"), features: ("ss02", "ss03"))
+#let _math_text_opts = (font: (.._serif_font, "Minion Math"), features: ("ss02", "ss03"))
 #let _mono_font = "IBM Plex Mono"
 #let _symbol_font = "Zapf Dingbats"
 #let _draft = "草稿"
