@@ -8,8 +8,10 @@
   outer: (far: config._page_margin, width: config._page_margin_note_width, sep: config._page_margin_sep),
   top: config._page_top_margin,
   bottom: config._page_bottom_margin,
+  book: config._two_sided,
   clearance: config._main_size,
 )
+
 /// text properties for the main body
 #let _pre_chapter() = {
   counter(math.equation).update(0)
@@ -20,7 +22,7 @@
   justify-page()
 }
 
-#let preamble(body) = {
+#let preamble(config, body) = {
   set page(numbering: "I")
   set heading(
     numbering: none,
@@ -46,7 +48,6 @@
   author,
   date,
   draft,
-  two-sided,
   chap-imgs,
   body,
 ) = {
@@ -67,18 +68,11 @@
   }
 
   set document(title: title.at(config._lang), author: author_en, date: date)
-  let marginaliaconfig = (
-    .._page_geo(config),
-    book: two-sided,
-    numbering: note-numbering.with(config),
-  )
-
-  marginalia.configure(..marginaliaconfig)
+  show: marginalia.setup.with(.._page_geo(config))
 
   set page(
     // explicitly set the paper
     paper: "a4",
-    ..marginalia.page-setup(..marginaliaconfig),
     header: context if not is_starting() and current_chapter() != none {
       marginalia.notecounter.update(0)
       let (index: (chap_idx, sect_idx), body: (chap, sect)) = current_chapter()
@@ -94,7 +88,7 @@
           sect
         }
       ]
-      let book = marginalia._config.get().book
+      let book = config._two_sided
       let book_left = book and is_even_page()
       let x_alignmnent = if book_left {
         left
@@ -109,7 +103,7 @@
       let page_num = semi(config._page_num_size, current_page())
 
       _wideblock(
-        double: true,
+        side: "both",
         {
           box(
             width: leftm.width,
@@ -137,7 +131,7 @@
       let rightm = marginalia.get-right()
 
       _wideblock(
-        double: true,
+        side: "both",
         page-number(config),
       )
     },
@@ -259,20 +253,12 @@
   columns(2, [#outline(..args, title: none)#v(1pt)])
 }
 
-#let mainbody(config, body, two-sided, chap-imgs) = {
+#let mainbody(config, body, chap-imgs) = {
   // make sure the page is start at right
   justify-page()
   let sans = text.with(font: config._sans_font)
 
-  let marginaliaconfig = (
-    .._page_geo(config),
-    book: two-sided,
-  )
-
-  marginalia.configure(..marginaliaconfig)
-
   set page(
-    ..marginalia.page-setup(..marginaliaconfig),
     //for draft
     background: context if is_starting() {
       set image(width: 100%)
@@ -293,7 +279,7 @@
   show heading.where(level: 1): it => {
     _pre_chapter()
     _wideblock(
-      double: true,
+      side: "both",
       _fancy_chapter_heading(
         config,
         it,
@@ -302,7 +288,7 @@
     marginalia.note(
       text-style: note_text_style(config),
       par-style: note_par_style,
-      numbered: false,
+      numbering: none,
       shift: false,
       keep-order: true,
       {
@@ -377,7 +363,6 @@
 // TODO: specify the appendix heading
 #let appendix(config, body) = {
   justify-page()
-
   context {
     let offset = counter(heading).get().first()
     set heading(
@@ -415,12 +400,13 @@
 #let make-index(config, group: "default", indent: 1em, separator: [, ], columns: 3) = {
   justify-page()
   set page(
-    margin: (top: config._page_top_margin, x: config._page_margin + config._page_margin_sep),
+    margin: (top: config._page_top_margin, x: config._page_margin),
     header: none,
     footer: page-number(config, offset: config._page_margin_sep),
   )
   heading(depth: 1, numbering: none, supplement: none, config.i18n.index)
   show: std.columns.with(columns)
+  show: block.with(inset: (x: config._page_margin_sep))
   use_word_list(
     group,
     it => {

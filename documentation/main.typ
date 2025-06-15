@@ -28,3 +28,4 @@
 
 #make-index()
 #include "misc/ref.typ"
+#lorem(100)

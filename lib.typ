@@ -14,12 +14,11 @@
   affiliation: "[Department]",
   date: datetime.today(),
   draft: false,
-  two-sided: false,
   title-style: "[title-style]",
   chap-imgs: (),
 ) = {
   import "src/components.typ": heavyrule, midrule
-  import "src/template.typ": template, appendix, subheading, _outline, make-index, mainbody
+  import "src/template.typ": template, appendix, subheading, _outline, make-index, mainbody, preamble
   import "src/titlepage.typ": titlepage
   import "src/environments.typ": _proposition, _highlighteq, _example, _definition, _proof
   import "src/packages/marginalia.typ": _note, _notefigure, _wideblock
@@ -43,7 +42,6 @@
       author,
       date,
       draft,
-      two-sided,
       chap-imgs,
     ),
     titlepage: titlepage(
@@ -56,7 +54,8 @@
       draft,
     ),
     appendix: appendix.with(preset),
-    mainbody: body => mainbody(preset, body, two-sided, chap-imgs),
+    preamble: preamble.with(preset),
+    mainbody: body => mainbody(preset, body, chap-imgs),
     subheading: subheading.with(preset),
     outline: _outline.with(preset),
     proposition: _proposition.with(preset),
@@ -74,6 +73,6 @@
 
 // reexport
 #import "src/index.typ": index
-#import "src/template.typ": preamble, asterism
+#import "src/template.typ": asterism
 #import "src/environments.typ": multi-row
 #import "src/components.typ": justify-page

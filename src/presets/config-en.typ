@@ -27,6 +27,7 @@
 #let _page_margin_sep = 8mm
 #let _page_margin_note_width = 40mm
 #let _chap_top_margin = 100mm
+#let _two_sided = true
 // for the "book" weights of NCM font
 #let _default_weight = 400
 #let _subheading_size = 13pt

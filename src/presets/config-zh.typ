@@ -31,6 +31,7 @@
 // for the "book" weights of NCM font
 #let _default_weight = 400
 #let _subheading_size = 13pt
+#let _two_sided = true
 
 #let i18n = (
   chapter: "章",

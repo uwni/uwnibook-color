@@ -3,12 +3,13 @@
 /// this file is used to import and config packages
 ///
 
-#import "@local/uwnibook-color:0.1.0": *
+#import "@local/uwnibook-color:0.1.1": *
 #import "header_imgs/imgs.typ": imgs
 #import "my-preset.typ"
 
 #let (
   template,
+  preamble,
   titlepage,
   outline,
   mainbody,
@@ -38,8 +39,6 @@
   date: datetime.today(),
   // set to true to enable draft watermark, so that you can prevent from submitting a draft version
   draft: false,
-  // set to true to enable two-sided layout
-  two-sided: true,
   // "modern"|"classic"
   title-style: "book",
   chap-imgs: imgs,

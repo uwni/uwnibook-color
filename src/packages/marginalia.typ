@@ -1,35 +1,20 @@
-#import "../../packages/typst-marginalia/lib.typ" as marginalia // import marginalia package, use universe version as it contains the necessary functions
-
-#import "../components.typ": is_even_page // import component
+#import "@preview/marginalia:0.2.0" // import marginalia package, use universe version as it contains the necessary functions
 
 #let note_text_style(config) = (size: 0.8 * 11pt, style: "normal", weight: "regular", font: config._caption_font)
 #let note_par_style = (spacing: 1.2em, leading: 0.5em, hanging-indent: 0pt)
-#let page_margin = 15mm
-#let block-style(config, loc) = if calc.even(loc.page()) {
+#let block-style(config) = side => if side == "left" {
   (
-    stroke: (left: config._color_palette.accent + page_margin),
-    outset: (left: page_margin, rest: 1pt),
+    stroke: (left: config._color_palette.accent + config._page_margin),
+    outset: (left: config._page_margin, rest: 1pt),
     width: 100%,
   )
 } else {
   (
-    stroke: (right: config._color_palette.accent + page_margin),
-    outset: (right: page_margin, rest: 1pt),
+    stroke: (right: config._color_palette.accent + config._page_margin),
+    outset: (right: config._page_margin, rest: 1pt),
     width: 100%,
   )
 }
-
-#let _note(config, ..args) = context {
-  marginalia.note(
-    text-style: note_text_style(config),
-    par-style: note_par_style,
-    block-style: block-style.with(config),
-    ..args,
-  )
-}
-
-#let _notefigure(config) = marginalia.notefigure.with(text-style: note_text_style(config), par-style: note_par_style)
-#let _wideblock = marginalia.wideblock
 
 /// Format note marker
 /// -> content
@@ -57,3 +42,17 @@
     symbol,
   )
 }
+
+#let _note(config, ..args) = context {
+  marginalia.note(
+    text-style: note_text_style(config),
+    par-style: note_par_style,
+    block-style: block-style(config),
+    numbering: note-numbering.with(config),
+    ..args,
+  )
+}
+
+#let _notefigure(config) = marginalia.notefigure.with(text-style: note_text_style(config), par-style: note_par_style)
+#let _wideblock = marginalia.wideblock
+
