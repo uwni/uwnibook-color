@@ -1,6 +1,6 @@
 #import "@preview/cheq:0.2.2": checklist
 #import "@preview/zebraw:0.5.5": zebraw
-#import "@preview/treet:0.1.1": *
+#import "@preview/treet:0.2.0": *
 #import "../packages.typ": components, note
 #show: checklist
 #show: zebraw.with(numbering: false)
@@ -16,7 +16,7 @@
 君可以 shell 命令復刻簡單範本。
 
 ```sh
-  typst init @preview/uwnibook-color:0.1.0
+  typst init @preview/uwnibook-color:0.2.0
 ```
 
 範本內已有 uwnibook-color 模板之基礎。循理衍其文章，行快而便也。惟範本素而不飾，本冊 @chap:example 各例悉備，可以效也。
