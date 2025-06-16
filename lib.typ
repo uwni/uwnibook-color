@@ -54,7 +54,7 @@
       draft,
     ),
     appendix: appendix.with(preset),
-    preamble: preamble.with(preset),
+    preamble: preamble,
     mainbody: body => mainbody(preset, body, chap-imgs),
     subheading: subheading.with(preset),
     outline: _outline.with(preset),

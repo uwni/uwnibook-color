@@ -22,7 +22,7 @@
   justify-page()
 }
 
-#let preamble(config, body) = {
+#let preamble(body) = {
   set page(numbering: "I")
   set heading(
     numbering: none,
@@ -331,10 +331,10 @@
     set figure(gap: 0pt)
 
     show figure.caption.where(position: top): it => context {
-      let height = measure(width: marginaliaconfig.outer.width, block(it)).height
+      let height = measure(width: config._page_margin_note_width, block(it)).height
       _note(
         config,
-        numbered: false,
+        numbering: none,
         dy: if overheight { 0pt } else { f_height - height },
         align-baseline: false,
         keep-order: true,
