@@ -1,7 +1,7 @@
 #import "components.typ": *
 #import "packages/marginalia.typ": *
 #import "index.typ": use_word_list
-#import "environments.typ": _reset_env_counting, _env_state
+#import "environments.typ": _env_state, _reset_env_counting
 
 #let _page_geo(config) = (
   inner: (far: config._page_margin, width: 0mm, sep: 0mm),
@@ -159,12 +159,9 @@
   show math.equation: set text(..config._math_text_opts)
   show math.equation: set block(spacing: config._eq_spacing)
   show math.equation: it => {
-    if it.block {
-      let eq = if it.has("label") { it } else [
-        #counter(math.equation).update(v => if v == 0 { 0 } else { v - 1 })
-        #math.equation(it.body, block: true, numbering: none)#label("")
-      ]
-      eq
+    if it.block and not it.has("label") and it.numbering != none {
+      counter(math.equation).update(v => calc.max(0, v - 1))
+      math.equation(it.body, block: true, numbering: none)
     } else {
       it
     }
