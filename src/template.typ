@@ -48,7 +48,6 @@
   author,
   date,
   draft,
-  chap-imgs,
   body,
 ) = {
   ///utilities
@@ -262,7 +261,7 @@
       place(
         top + center,
         block(
-          chap-imgs.at(counter(heading).get().at(0)),
+          chap-imgs.at(calc.rem(counter(heading).get().at(0), chap-imgs.len())),
           clip: true,
           width: 100%,
           height: config._chap_top_margin,
