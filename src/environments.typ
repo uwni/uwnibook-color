@@ -19,10 +19,6 @@
   breakable: true,
 )
 
-#let _env_state = state("env", (:))
-
-#let _reset_env_counting() = _env_state.update(it => it.keys().map(k => (k, 0)).to-dict())
-
 #let accent-frame-heading(config, it) = {
   set text(
     font: config._sans_font,
@@ -105,43 +101,48 @@
   body,
   label: none,
   numbered: true,
-) = [
-  #_env_state.update(it => it + (str(kind): it.at(kind, default: 0) + 1))
-  #show figure.where(kind: kind): set block(breakable: true)
-  #show figure.where(kind: kind): set par(spacing: config._envskip)
-  #let i18n = config.i18n.at(kind)
-  #let (name, supplement) = if type(i18n) == dictionary {
+) = context {
+  let i18n = config.i18n.at(kind)
+  let (name, supplement) = if type(i18n) == dictionary {
     (i18n.name, i18n.supplement)
   } else if type(i18n) == str {
     (i18n, i18n)
   } else { panic("Invalid i18n entry for kind: " + kind) }
-  
-  #figure(
-    kind: kind,
-    supplement: supplement,
-    placement: none,
-    caption: none,
-    {
-      set align(left)
-      topdeco(config)
-      block(
-        breakable: true,
-        ..frame(config),
-        [
-          #heading(if numbered {
-            let num = context [#current_chapter().index.at(0).#_env_state.get().at(kind)]
-            [#name#h(.3em) #num #h(.5em) #title]
-          } else {
-            name + h(.5em) + title
-          })
-          #body
-        ],
-      )
-      bottomdeco(config)
-    },
-  ) #label
-]
 
+  let chap = current_chapter().index.at(0)
+  let env_cnt = counter("env-" + kind + "-" + str(chap))
+  let num = [#chap.#{ env_cnt.get().at(0) + 1 }]
+
+  show figure.where(kind: kind): set block(breakable: true)
+  show figure.where(kind: kind): set par(spacing: config._envskip)
+  [
+    #figure(
+      kind: kind,
+      supplement: supplement,
+      placement: none,
+      caption: none,
+      numbering: (..) => { if numbered { num } },
+      {
+        set align(left)
+        topdeco(config)
+        block(
+          ..frame(config),
+          [
+            #heading(if numbered {
+              [#name#h(.3em) #num #h(.5em) #title]
+            } else {
+              name + h(.5em) + title
+            })
+            #body
+          ],
+        )
+        bottomdeco(config)
+      },
+    )
+    #label
+    #env_cnt.step()
+  ]
+}
 
 #let _remark(config, ..args) = environment(
   config,
