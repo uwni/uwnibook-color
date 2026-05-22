@@ -42,7 +42,6 @@
       author,
       date,
       draft,
-      chap-imgs,
     ),
     titlepage: titlepage(
       preset,
