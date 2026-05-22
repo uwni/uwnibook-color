@@ -1,7 +1,6 @@
 #import "components.typ": *
 #import "packages/marginalia.typ": *
 #import "index.typ": use_word_list
-#import "environments.typ": _env_state, _reset_env_counting
 
 #let _page_geo(config) = (
   inner: (far: config._page_margin, width: 0mm, sep: 0mm),
@@ -18,7 +17,6 @@
   counter(figure.where(kind: table)).update(0)
   counter(figure.where(kind: image)).update(0)
   counter(figure.where(kind: raw)).update(0)
-  _reset_env_counting()
   justify-page()
 }
 
